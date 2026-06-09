@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>威士忌酒厂地图 🥃</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            background: #f4f4f4; 
+            color: #333;
+            overflow: hidden; 
+        }
+
+        .header {
+            background: #1a3a1a;
+            color: #fff;
+            text-align: center;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1000;
+        }
+
+        #map { 
+            height: calc(100vh - 50px); 
+            width: 100%; 
+            position: absolute;
+            top: 50px;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* 产区颜色变量定义 */
+        :root {
+            --speyside: #d4af37;
+            --highland: #2e7d32;
+            --islay: #b71c1c;
+            --islands: #1565c0;
+            --lowland: #5d4037;
+            --campbeltown: #e65100;
+            --others: #616161;
+        }
+
+        /* 动态颜色标记 */
+        .region-marker {
+            color: #fff;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+
+        /* 底部抽屉样式 (保持不变) */
+        .bottom-sheet { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-radius: 16px 16px 0 0; box-shadow: 0 -4px 15px rgba(0,0,0,0.1); z-index: 2000; transition: transform 0.3s ease-out; transform: translateY(calc(100% - 60px)); max-height: 70vh; display: flex; flex-direction: column; }
+        .bottom-sheet.expanded { transform: translateY(0); }
+        .sheet-handle { padding: 10px 0; text-align: center; cursor: pointer; flex-shrink: 0; }
+        .sheet-handle::before { content: ''; display: inline-block; width: 40px; height: 5px; background: #ccc; border-radius: 3px; }
+        .sheet-header { padding: 0 15px 10px; font-size: 16px; font-weight: bold; color: #1a3a1a; border-bottom: 1px solid #eee; flex-shrink: 0; }
+        .sheet-content { overflow-y: auto; padding: 0 15px 20px; flex: 1; -webkit-overflow-scrolling: touch; }
+        
+        .legend-item { padding: 12px 0; border-bottom: 1px dashed #eee; font-size: 14px; display: flex; align-items: center; cursor: pointer; }
+        .legend-item:active { background: #f9f9f9; }
+        .legend-num { font-weight: bold; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; margin-right: 10px; flex-shrink: 0; }
+        .legend-name { flex: 1; font-weight: 500; }
+        
+        .status-active { color: #2e7d32; font-size: 12px; }
+        .status-closed { color: #999; font-style: italic; font-size: 12px; }
+        .status-demolished { color: #b71c1c; text-decoration: line-through; font-size: 12px; }
+
+        /* 弹窗优化 */
+        .leaflet-popup-content-wrapper { border-radius: 8px; box-shadow: 0 3px 14px rgba(0,0,0,0.2); }
+        .leaflet-popup-content { margin: 10px 14px; font-size: 14px; line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <div class="header">威士忌酒厂地图 🥃</div>
+    <div id="map"></div>
+
+    <div class="bottom-sheet" id="bottomSheet">
+        <div class="sheet-handle" id="sheetToggle"></div>
+        <div class="sheet-header">📍 酒厂列表 (点击定位)</div>
+        <div class="sheet-content" id="legend-list"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // 1. 初始化地图 (使用之前推荐的 CartoDB 国内可用底图)
+        var map = L.map('map', { zoomControl: true, attributionControl: false })
+                   .setView([57.0, -4.0], 6); // 调整为全苏格兰视野
+
+        // 使用 CartoDB Positron 全球底图 (国内秒开)
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            maxZoom: 18
+        }).addTo(map);
+
+        // 2. 产区颜色映射表
+        const regionColors = {
+            'Speyside': '#d4af37',
+            'Highland': '#2e7d32',
+            'Islay': '#b71c1c',
+            'Islands': '#1565c0',
+            'Lowland': '#5d4037',
+            'Campbeltown': '#e65100',
+            'Others': '#616161'
+        };
+
+        // 3. 辅助函数：根据产区获取颜色
+        function getColorByRegion(region) {
+            switch(region) {
+                case 'Speyside': return regionColors['Speyside'];
+                case 'Highland': return regionColors['Highland'];
+                case 'Islay': return regionColors['Islay'];
+                case 'Islands': return regionColors['Islands'];
+                case 'Lowland': return regionColors['Lowland'];
+                case 'Campbeltown': return regionColors['Campbeltown'];
+                default: return regionColors['Others'];
+            }
+        }
+
+        // 4. 从你上传的 JSON 数据
+        var distilleriesData = [
+            { "id": 1, "name": "Glenfarclas", "region": "Speyside", "latitude": 57.4267, "longitude": -3.3183 },
+            { "id": 2, "name": "Glenlivet", "region": "Speyside", "latitude": 57.3444, "longitude": -3.3375 },
+            { "id": 3, "name": "Bowmore", "region": "Islay", "latitude": 55.7592, "longitude": -6.2889 },
+            { "id": 4, "name": "Highland Park", "region": "Islands", "latitude": 58.9744, "longitude": -2.9542 },
+            { "id": 5, "name": "Auchentoshan", "region": "Lowland", "latitude": 55.9222, "longitude": -4.4394 },
+            { "id": 6, "name": "Macduff", "region": "Highland", "latitude": 57.6625, "longitude": -2.5022 },
+            { "id": 7, "name": "Longmorn", "region": "Speyside", "latitude": 57.6083, "longitude": -3.2778 },
+            { "id": 8, "name": "Tamdhu", "region": "Speyside", "latitude": 57.4706, "longitude": -3.3444 },
+            { "id": 9, "name": "Glen Grant", "region": "Speyside", "latitude": 57.5147, "longitude": -3.2458 },
+            { "id": 10, "name": "Bunnahabhain", "region": "Islay", "latitude": 55.8833, "longitude": -6.1264 },
+            { "id": 11, "name": "Tomatin", "region": "Highland", "latitude": 57.34, "longitude": -3.9858 },
+            { "id": 12, "name": "BenRiach", "region": "Speyside", "latitude": 57.6156, "longitude": -3.2917 },
+            { "id": 13, "name": "Dalmore", "region": "Highland", "latitude": 57.6886, "longitude": -4.2411 },
+            { "id": 14, "name": "Talisker", "region": "Islands", "latitude": 57.3025, "longitude": -6.3564 },
+            { "id": 15, "name": "Glenfiddich", "region": "Speyside", "latitude": 57.4539, "longitude": -3.1286 },
+            { "id": 16, "name": "Glenturret", "region": "Highland", "latitude": 56.3892, "longitude": -3.8569 },
+            { "id": 17, "name": "Scapa", "region": "Islands", "latitude": 58.9592, "longitude": -2.9733 },
+            { "id": 18, "name": "Inchgower", "region": "Speyside", "latitude": 57.6622, "longitude": -3.0033 },
+            { "id": 19, "name": "Glen Garioch", "region": "Highland", "latitude": 57.3408, "longitude": -2.3114 },
+            { "id": 20, "name": "Inverleven", "region": "Lowland", "status": "Demolished", "latitude": 55.9458, "longitude": -4.5644 },
+            { "id": 21, "name": "Glenglassaugh", "region": "Highland", "latitude": 57.6847, "longitude": -2.7178 },
+            { "id": 22, "name": "Glenkinchie", "region": "Lowland", "latitude": 55.9142, "longitude": -2.8906 },
+            { "id": 23, "name": "Bruichladdich", "region": "Islay", "latitude": 55.7656, "longitude": -6.3614 },
+            { "id": 24, "name": "Macallan", "region": "Speyside", "latitude": 57.4847, "longitude": -3.2078 },
+            { "id": 25, "name": "Rosebank", "region": "Lowland", "latitude": 56.0044, "longitude": -3.8058 },
+            { "id": 26, "name": "Clynelish", "region": "Highland", "latitude": 58.0244, "longitude": -3.8694 },
+            { "id": 27, "name": "Springbank", "region": "Campbeltown", "latitude": 55.4261, "longitude": -5.6078 },
+            { "id": 28, "name": "Tullibardine", "region": "Highland", "latitude": 56.2861, "longitude": -3.7508 },
+            { "id": 29, "name": "Laphroaig", "region": "Islay", "latitude": 55.63, "longitude": -6.1528 },
+            { "id": 30, "name": "Glenrothes", "region": "Speyside", "latitude": 57.5258, "longitude": -3.2142 },
+            { "id": 31, "name": "Isle of Jura", "region": "Islands", "latitude": 55.8325, "longitude": -5.9522 },
+            { "id": 32, "name": "Edradour", "region": "Highland", "latitude": 56.7019, "longitude": -3.7025 },
+            { "id": 33, "name": "Ardbeg", "region": "Islay", "latitude": 55.64, "longitude": -6.1103 },
+            { "id": 34, "name": "Tamnavulin", "region": "Speyside", "latitude": 57.3236, "longitude": -3.3444 },
+            { "id": 35, "name": "Glen Moray", "region": "Speyside", "latitude": 57.6492, "longitude": -3.3364 },
+            { "id": 36, "name": "Benrinnes", "region": "Speyside", "latitude": 57.4208, "longitude": -3.2961 },
+            { "id": 37, "name": "Cragganmore", "region": "Speyside", "latitude": 57.4103, "longitude": -3.3961 },
+            { "id": 38, "name": "Caperdonich", "region": "Speyside", "status": "Demolished", "latitude": 57.5208, "longitude": -3.2422 },
+            { "id": 39, "name": "Linkwood", "region": "Speyside", "latitude": 57.6322, "longitude": -3.2942 },
+            { "id": 40, "name": "Balvenie", "region": "Speyside", "latitude": 57.4606, "longitude": -3.1278 },
+            { "id": 41, "name": "Dailuaine", "region": "Speyside", "latitude": 57.4525, "longitude": -3.2678 },
+            { "id": 42, "name": "Tobermory", "region": "Islands", "latitude": 56.6231, "longitude": -6.0647 },
+            { "id": 43, "name": "Port Ellen", "region": "Islay", "latitude": 55.6289, "longitude": -6.1825 },
+            { "id": 44, "name": "Craigellachie", "region": "Speyside", "latitude": 57.4908, "longitude": -3.2425 },
+            { "id": 45, "name": "Dallas Dhu", "region": "Speyside", "status": "Closed", "latitude": 57.5956, "longitude": -3.6186 },
+            { "id": 46, "name": "Glenlossie", "region": "Speyside", "latitude": 57.6044, "longitude": -3.315 },
+            { "id": 47, "name": "Benromach", "region": "Speyside", "latitude": 57.6144, "longitude": -3.6019 },
+            { "id": 48, "name": "Balmenach", "region": "Speyside", "latitude": 57.3675, "longitude": -3.6183 },
+            { "id": 49, "name": "St. Magdalene", "region": "Lowland", "status": "Closed", "latitude": 55.9767, "longitude": -3.5939 },
+            { "id": 50, "name": "Bladnoch", "region": "Lowland", "latitude": 54.8569, "longitude": -4.455 },
+            { "id": 51, "name": "Bushmills", "region": "Northern Ireland", "latitude": 55.2014, "longitude": -6.5206 },
+            { "id": 52, "name": "Old Pulteney", "region": "Highland", "latitude": 58.4358, "longitude": -3.0828 },
+            { "id": 53, "name": "Caol Ila", "region": "Islay", "latitude": 55.8542, "longitude": -6.1086 },
+            { "id": 54, "name": "Aberlour", "region": "Speyside", "latitude": 57.4678, "longitude": -3.2289 },
+            { "id": 55, "name": "Royal Brackla", "region": "Highland", "latitude": 57.5583, "longitude": -3.9181 },
+            { "id": 56, "name": "Coleburn", "region": "Speyside", "status": "Closed", "latitude": 57.6081, "longitude": -3.2483 },
+            { "id": 57, "name": "Glen Mhor", "region": "Highland", "status": "Closed", "latitude": 57.4831, "longitude": -4.2417 },
+            { "id": 58, "name": "Strathisla", "region": "Speyside", "latitude": 57.5475, "longitude": -2.9644 },
+            { "id": 59, "name": "Teaninich", "region": "Highland", "latitude": 57.6922, "longitude": -4.2678 },
+            { "id": 60, "name": "Aberfeldy", "region": "Highland", "latitude": 56.6253, "longitude": -3.8744 },
+            { "id": 61, "name": "Brora", "region": "Highland", "latitude": 58.0244, "longitude": -3.8694 },
+            { "id": 62, "name": "Glenlochy", "region": "Highland", "status": "Closed", "latitude": 56.8228, "longitude": -5.0975 },
+            { "id": 63, "name": "Glentauchers", "region": "Speyside", "latitude": 57.5253, "longitude": -3.0417 },
+            { "id": 64, "name": "Mannochmore", "region": "Speyside", "latitude": 57.6039, "longitude": -3.3156 },
+            { "id": 65, "name": "Imperial", "region": "Speyside", "status": "Demolished", "latitude": 57.4428, "longitude": -3.2725 },
+            { "id": 66, "name": "Ardmore", "region": "Highland", "latitude": 57.3547, "longitude": -2.7161 },
+            { "id": 67, "name": "Banff", "region": "Speyside", "status": "Demolished", "latitude": 57.6631, "longitude": -2.5317 },
+            { "id": 68, "name": "Blair Athol", "region": "Highland", "latitude": 56.7011, "longitude": -3.7258 },
+            { "id": 69, "name": "Glen Albyn", "region": "Highland", "status": "Demolished", "latitude": 57.4839, "longitude": -4.2408 },
+            { "id": 70, "name": "Balblair", "region": "Highland", "latitude": 57.835, "longitude": -4.1842 },
+            { "id": 71, "name": "Glenburgie", "region": "Speyside", "latitude": 57.6194, "longitude": -3.5133 },
+            { "id": 72, "name": "Miltonduff", "region": "Speyside", "latitude": 57.6256, "longitude": -3.3556 },
+            { "id": 73, "name": "Aultmore", "region": "Speyside", "latitude": 57.5583, "longitude": -3.0181 },
+            { "id": 74, "name": "North Port", "region": "Highland", "status": "Closed", "latitude": 56.7356, "longitude": -2.6569 },
+            { "id": 75, "name": "Glenury Royal", "region": "Highland", "status": "Closed", "latitude": 56.9631, "longitude": -2.2225 },
+            { "id": 76, "name": "Mortlach", "region": "Speyside", "latitude": 57.4456, "longitude": -3.1256 },
+            { "id": 77, "name": "Glen Ord", "region": "Highland", "latitude": 57.5186, "longitude": -4.4344 },
+            { "id": 78, "name": "Ben Nevis", "region": "Highland", "latitude": 56.8353, "longitude": -5.0747 },
+            { "id": 79, "name": "Deanston", "region": "Highland", "latitude": 56.1906, "longitude": -4.0722 },
+            { "id": 80, "name": "Glen Spey", "region": "Speyside", "latitude": 57.5222, "longitude": -3.2128 },
+            { "id": 81, "name": "Glen Keith", "region": "Speyside", "latitude": 57.5461, "longitude": -2.9669 },
+            { "id": 82, "name": "Glencadam", "region": "Highland", "latitude": 56.7381, "longitude": -2.6542 },
+            { "id": 83, "name": "Convalmore", "region": "Speyside", "status": "Closed", "latitude": 57.4472, "longitude": -3.1206 },
+            { "id": 84, "name": "Glendullan", "region": "Speyside", "latitude": 57.4478, "longitude": -3.1117 },
+            { "id": 85, "name": "Glen Elgin", "region": "Speyside", "latitude": 57.5997, "longitude": -3.2658 },
+            { "id": 86, "name": "Glenesk", "region": "Highland", "status": "Closed", "latitude": 56.7417, "longitude": -2.4839 },
+            { "id": 87, "name": "Millburn", "region": "Highland", "status": "Closed", "latitude": 57.4819, "longitude": -4.2128 },
+            { "id": 88, "name": "Speyburn", "region": "Speyside", "latitude": 57.5256, "longitude": -3.2428 },
+            { "id": 89, "name": "Tomintoul", "region": "Speyside", "latitude": 57.3467, "longitude": -3.3853 },
+            { "id": 90, "name": "Pittyvaich", "region": "Speyside", "status": "Closed", "latitude": 57.4469, "longitude": -3.125 },
+            { "id": 91, "name": "Dufftown", "region": "Speyside", "latitude": 57.4439, "longitude": -3.1203 },
+            { "id": 92, "name": "Lochside", "region": "Highland", "status": "Demolished", "latitude": 56.7194, "longitude": -2.4764 },
+            { "id": 93, "name": "Glen Scotia", "region": "Campbeltown", "latitude": 55.4264, "longitude": -5.6108 },
+            { "id": 94, "name": "Fettercairn", "region": "Highland", "latitude": 56.8489, "longitude": -2.5761 },
+            { "id": 95, "name": "Auchroisk", "region": "Speyside", "latitude": 57.5217, "longitude": -3.0139 },
+            { "id": 96, "name": "GlenDronach", "region": "Highland", "latitude": 57.4828, "longitude": -2.6247 },
+            { "id": 97, "name": "Littlemill", "region": "Lowland", "status": "Closed", "latitude": 55.9325, "longitude": -4.4914 },
+            { "id": 98, "name": "Inverleven", "region": "Lowland", "status": "Closed", "latitude": 55.9458, "longitude": -4.5644 },
+            { "id": 99, "name": "Glenugie", "region": "Highland", "status": "Closed", "latitude": 57.5006, "longitude": -1.8028 },
+            { "id": 100, "name": "Strathmill", "region": "Speyside", "latitude": 57.5344, "longitude": -2.9731 },
+            { "id": 101, "name": "Knockando", "region": "Speyside", "latitude": 57.4658, "longitude": -3.3517 },
+            { "id": 102, "name": "Dalwhinnie", "region": "Highland", "latitude": 56.9389, "longitude": -4.2389 },
+            { "id": 103, "name": "Royal Lochnagar", "region": "Highland", "latitude": 57.0406, "longitude": -3.2081 },
+            { "id": 104, "name": "Glenburgie (Glencraig)", "region": "Speyside", "latitude": 57.6194, "longitude": -3.5133 },
+            { "id": 105, "name": "Tormore", "region": "Speyside", "latitude": 57.4019, "longitude": -3.4142 },
+            { "id": 106, "name": "Cardhu", "region": "Speyside", "latitude": 57.4703, "longitude": -3.3425 },
+            { "id": 107, "name": "Glenallachie", "region": "Speyside", "latitude": 57.4411, "longitude": -3.2292 },
+            { "id": 108, "name": "Allt-a-Bhainne", "region": "Speyside", "latitude": 57.4131, "longitude": -3.1783 },
+            { "id": 109, "name": "Miltonduff (Mosstowie)", "region": "Speyside", "latitude": 57.6256, "longitude": -3.3556 },
+            { "id": 110, "name": "Oban", "region": "Highland", "latitude": 56.4139, "longitude": -5.4719 },
+            { "id": 111, "name": "Lagavulin", "region": "Islay", "latitude": 55.6369, "longitude": -6.1264 },
+            { "id": 112, "name": "Loch Lomond (Inchmurrin/Inchmoan)", "region": "Highland", "latitude": 55.9856, "longitude": -4.5828 },
+            { "id": 113, "name": "Braeval (Braes of Glenlivet)", "region": "Speyside", "latitude": 57.2847, "longitude": -3.2981 },
+            { "id": 114, "name": "Springbank (Longrow)", "region": "Campbeltown", "latitude": 55.4261, "longitude": -5.6078 },
+            { "id": 115, "name": "Knockdhu (AnCnoc)", "region": "Speyside", "latitude": 57.575, "longitude": -2.7153 },
+            { "id": 116, "name": "Cooley", "region": "Ireland", "latitude": 54.0208, "longitude": -6.2125 },
+            { "id": 117, "name": "Connemara (Cooley Peated)", "region": "Ireland", "latitude": 54.0208, "longitude": -6.2125 },
+            { "id": 122, "name": "Loch Lomond (Croftengea)", "region": "Highland", "latitude": 55.9856, "longitude": -4.5828 },
+            { "id": 123, "name": "Glengoyne", "region": "Highland", "latitude": 56.0136, "longitude": -4.3389 },
+            { "id": 125, "name": "Glenmorangie", "region": "Highland", "latitude": 57.8267, "longitude": -4.1789 },
+            { "id": 126, "name": "Springbank (Hazelburn)", "region": "Campbeltown", "latitude": 55.4261, "longitude": -5.6078 },
+            { "id": 127, "name": "Bruichladdich (Port Charlotte)", "region": "Islay", "latitude": 55.7656, "longitude": -6.3614 },
+            { "id": 129, "name": "Kilchoman", "region": "Islay", "latitude": 55.7878, "longitude": -6.4294 },
+            { "id": 135, "name": "Loch Lomond", "region": "Highland", "latitude": 55.9856, "longitude": -4.5828 },
+            { "id": 136, "name": "Eden Mill", "region": "Lowland", "latitude": 56.3639, "longitude": -2.8856 },
+            { "id": 137, "name": "St. George’s (English Whisky Co.)", "region": "England", "latitude": 52.4419, "longitude": 0.8958 },
+            { "id": 146, "name": "Cotswolds", "region": "England", "latitude": 52.0569, "longitude": -1.5947 },
+            { "id": 149, "name": "Ardnamurchan", "region": "Highland", "latitude": 56.6872, "longitude": -5.9264 },
+            { "id": 156, "name": "Glasgow Distillery", "region": "Lowland", "latitude": 55.85, "longitude": -4.3411 },
+            { "id": 161, "name": "Nc'nean Distillery", "region": "Highland", "latitude": 56.5919, "longitude": -5.9753 },
+            { "id": 162, "name": "Isle of Raasay", "region": "Islands", "latitude": 57.3486, "longitude": -6.0717 },
+            { "id": 163, "name": "Isle of Harris Distillery", "region": "Islands", "latitude": 57.8994, "longitude": -6.7972 },
+            { "id": 165, "name": "Wolfburn", "region": "Highland", "latitude": 58.6047, "longitude": -3.5411 },
+            { "id": 166, "name": "Torabhaig Distillery", "region": "Islands", "latitude": 57.1472, "longitude": -5.8506 },
+            { "id": 167, "name": "Clydeside Distillery", "region": "Lowland", "latitude": 55.8622, "longitude": -4.2922 },
+            { "id": 168, "name": "InchDairnie Distillery", "region": "Lowland", "latitude": 56.1731, "longitude": -3.2089 }
+        ];
+
+
+        // 5. 渲染逻辑
+        var markers = []; 
+        var legendList = document.getElementById('legend-list');
+        var bottomSheet = document.getElementById('bottomSheet');
+        var sheetToggle = document.getElementById('sheetToggle');
+
+        sheetToggle.addEventListener('click', function() {
+            bottomSheet.classList.toggle('expanded');
+        });
+
+        // 遍历数据
+        distilleriesData.forEach(function(item) {
+            var id = item.id;
+            var name = item.name;
+            var region = item.region || 'Others';
+            var status = item.status || 'Active';
+            var lat = item.latitude;
+            var lng = item.longitude;
+
+            // 获取对应产区的颜色
+            var bgColor = getColorByRegion(region);
+
+            // 创建自定义标记图标
+            var numberIcon = L.divIcon({
+                className: '', 
+                html: `<div class="region-marker" style="background: ${bgColor}">${id}</div>`,
+                iconSize: [28, 28],
+                iconAnchor: [14, 14]
+            });
+
+            var marker = L.marker([lat, lng], { icon: numberIcon }).addTo(map);
+            
+            // 弹窗内容增加产区和状态
+            marker.bindPopup(`<strong>${id}. ${name}</strong><br>
+                             <span style="color:#666; font-size:12px;">产区: ${region} | 状态: ${status}</span>`);
+            markers.push(marker);
+
+            // 创建右侧列表项
+            var itemElem = document.createElement('div');
+            itemElem.className = 'legend-item';
+            
+            var statusClass = 'status-active';
+            if (status.toLowerCase().includes('closed')) statusClass = 'status-closed';
+            if (status.toLowerCase().includes('demolished')) statusClass = 'status-demolished';
+
+            itemElem.innerHTML = `
+                <span class="legend-num" style="background: ${bgColor}">${id}</span> 
+                <span class="legend-name">${name}</span> 
+                <span class="${statusClass}">${status}</span>
+            `;
+
+            itemElem.addEventListener('click', function() {
+                map.flyTo([lat, lng], 13); 
+                marker.openPopup();
+                bottomSheet.classList.remove('expanded'); 
+            });
+
+            legendList.appendChild(itemElem);
+        });
+    </script>
+</body>
+</html>
