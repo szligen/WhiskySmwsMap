@@ -45,8 +45,8 @@
     "id": 7,
     "name": "Longmorn",
     "region": "Speyside",
-    "latitude": 57.6083,
-    "longitude": -3.2778
+    "latitude": 57.608616,
+    "longitude": -3.282232
   },
   {
     "id": 8,
@@ -80,8 +80,8 @@
     "id": 12,
     "name": "BenRiach",
     "region": "Speyside",
-    "latitude": 57.6156,
-    "longitude": -3.2917
+    "latitude": 57.611633,
+    "longitude": -3.292557
   },
   {
     "id": 13,
@@ -242,8 +242,8 @@
     "id": 35,
     "name": "Glen Moray",
     "region": "Speyside",
-    "latitude": 57.6492,
-    "longitude": -3.3364
+    "latitude": 57.644624,
+    "longitude": -3.341012
   },
   {
     "id": 36,
@@ -510,8 +510,8 @@
     "id": 72,
     "name": "Miltonduff",
     "region": "Speyside",
-    "latitude": 57.6256,
-    "longitude": -3.3556
+    "latitude": 57.623375,
+    "longitude": -3.369431
   },
   {
     "id": 73,
