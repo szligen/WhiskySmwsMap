@@ -3,134 +3,134 @@
     "id": 1,
     "name": "Glenfarclas",
     "region": "Speyside",
-    "latitude": 57.4267,
-    "longitude": -3.3183
+    "latitude": 57.426747,
+    "longitude": -3.315811
   },
   {
     "id": 2,
     "name": "Glenlivet",
     "region": "Speyside",
-    "latitude": 57.3444,
-    "longitude": -3.3375
+    "latitude": 57.343444,
+    "longitude": -3.338556
   },
   {
     "id": 3,
     "name": "Bowmore",
     "region": "Islay",
-    "latitude": 55.7592,
-    "longitude": -6.2889
+    "latitude": 55.756929,
+    "longitude": -6.289774
   },
   {
     "id": 4,
     "name": "Highland Park",
     "region": "Islands",
-    "latitude": 58.9744,
-    "longitude": -2.9542
+    "latitude": 58.96809,
+    "longitude": -2.955582
   },
   {
     "id": 5,
     "name": "Auchentoshan",
     "region": "Lowland",
-    "latitude": 55.9222,
-    "longitude": -4.4394
+    "latitude": 55.92197,
+    "longitude": -4.438232
   },
   {
     "id": 6,
     "name": "Macduff",
     "region": "Highland",
-    "latitude": 57.6625,
-    "longitude": -2.5022
+    "latitude": 57.657863,
+    "longitude": -2.512712
   },
   {
     "id": 7,
     "name": "Longmorn",
     "region": "Speyside",
-    "latitude": 57.608616,
-    "longitude": -3.282232
+    "latitude": 57.608597,
+    "longitude": -3.282295
   },
   {
     "id": 8,
     "name": "Tamdhu",
     "region": "Speyside",
-    "latitude": 57.4706,
-    "longitude": -3.3444
+    "latitude": 57.459849,
+    "longitude": -3.353028
   },
   {
     "id": 9,
     "name": "Glen Grant",
     "region": "Speyside",
-    "latitude": 57.5147,
-    "longitude": -3.2458
+    "latitude": 57.529835,
+    "longitude": -3.208097
   },
   {
     "id": 10,
     "name": "Bunnahabhain",
     "region": "Islay",
-    "latitude": 55.8833,
-    "longitude": -6.1264
+    "latitude": 55.883412,
+    "longitude": -6.126687
   },
   {
     "id": 11,
     "name": "Tomatin",
     "region": "Highland",
-    "latitude": 57.34,
-    "longitude": -3.9858
+    "latitude": 57.33899,
+    "longitude": -4.009499
   },
   {
     "id": 12,
     "name": "BenRiach",
     "region": "Speyside",
-    "latitude": 57.611633,
-    "longitude": -3.292557
+    "latitude": 57.611427,
+    "longitude": -3.292442
   },
   {
     "id": 13,
     "name": "Dalmore",
     "region": "Highland",
-    "latitude": 57.6886,
-    "longitude": -4.2411
+    "latitude": 57.68824,
+    "longitude": -4.239215
   },
   {
     "id": 14,
     "name": "Talisker",
     "region": "Islands",
-    "latitude": 57.3025,
-    "longitude": -6.3564
+    "latitude": 57.302177,
+    "longitude": -6.355788
   },
   {
     "id": 15,
     "name": "Glenfiddich",
     "region": "Speyside",
-    "latitude": 57.4539,
-    "longitude": -3.1286
+    "latitude": 57.45429,
+    "longitude": -3.127916
   },
   {
     "id": 16,
     "name": "Glenturret",
     "region": "Highland",
-    "latitude": 56.3892,
-    "longitude": -3.8569
+    "latitude": 56.389157,
+    "longitude": -3.853087
   },
   {
     "id": 17,
     "name": "Scapa",
     "region": "Islands",
-    "latitude": 58.9592,
-    "longitude": -2.9733
+    "latitude": 58.963238,
+    "longitude": -2.9853
   },
   {
     "id": 18,
     "name": "Inchgower",
     "region": "Speyside",
-    "latitude": 57.6622,
-    "longitude": -3.0033
+    "latitude": 57.661677,
+    "longitude": -2.961867
   },
   {
     "id": 19,
     "name": "Glen Garioch",
     "region": "Highland",
-    "latitude": 57.3408,
-    "longitude": -2.3114
+    "latitude": 57.338198,
+    "longitude": -2.319488
   },
   {
     "id": 20,
@@ -144,29 +144,29 @@
     "id": 21,
     "name": "Glenglassaugh",
     "region": "Highland",
-    "latitude": 57.6847,
-    "longitude": -2.7178
+    "latitude": 57.677288,
+    "longitude": -2.736727
   },
   {
     "id": 22,
     "name": "Glenkinchie",
     "region": "Lowland",
-    "latitude": 55.9142,
-    "longitude": -2.8906
+    "latitude": 55.8906,
+    "longitude": -2.891328
   },
   {
     "id": 23,
     "name": "Bruichladdich",
     "region": "Islay",
-    "latitude": 55.7656,
-    "longitude": -6.3614
+    "latitude": 55.766525,
+    "longitude": -6.362269
   },
   {
     "id": 24,
     "name": "Macallan",
     "region": "Speyside",
-    "latitude": 57.4847,
-    "longitude": -3.2078
+    "latitude": 57.485132,
+    "longitude": -3.20726
   },
   {
     "id": 25,
@@ -179,57 +179,57 @@
     "id": 26,
     "name": "Clynelish",
     "region": "Highland",
-    "latitude": 58.0244,
-    "longitude": -3.8694
+    "latitude": 58.023846,
+    "longitude": -3.867985
   },
   {
     "id": 27,
     "name": "Springbank",
     "region": "Campbeltown",
-    "latitude": 55.4261,
-    "longitude": -5.6078
+    "latitude": 55.425433,
+    "longitude": -5.609087
   },
   {
     "id": 28,
     "name": "Tullibardine",
     "region": "Highland",
-    "latitude": 56.2861,
-    "longitude": -3.7508
+    "latitude": 56.258073,
+    "longitude": -3.785036
   },
   {
     "id": 29,
     "name": "Laphroaig",
     "region": "Islay",
-    "latitude": 55.63,
-    "longitude": -6.1528
+    "latitude": 55.630057,
+    "longitude": -6.152204
   },
   {
     "id": 30,
     "name": "Glenrothes",
     "region": "Speyside",
-    "latitude": 57.5258,
-    "longitude": -3.2142
+    "latitude": 57.526463,
+    "longitude": -3.215898
   },
   {
     "id": 31,
     "name": "Isle of Jura",
     "region": "Islands",
-    "latitude": 55.8325,
-    "longitude": -5.9522
+    "latitude": 55.832908,
+    "longitude": -5.950832
   },
   {
     "id": 32,
     "name": "Edradour",
     "region": "Highland",
-    "latitude": 56.7019,
-    "longitude": -3.7025
+    "latitude": 56.70134,
+    "longitude": -3.702129
   },
   {
     "id": 33,
     "name": "Ardbeg",
     "region": "Islay",
-    "latitude": 55.64,
-    "longitude": -6.1103
+    "latitude": 55.640466,
+    "longitude": -6.10826
   },
   {
     "id": 34,
@@ -242,94 +242,94 @@
     "id": 35,
     "name": "Glen Moray",
     "region": "Speyside",
-    "latitude": 57.644624,
-    "longitude": -3.341012
+    "latitude": 57.644559,
+    "longitude": -3.340752
   },
   {
     "id": 36,
     "name": "Benrinnes",
     "region": "Speyside",
-    "latitude": 57.4208,
-    "longitude": -3.2961
+    "latitude": 57.441841,
+    "longitude": -3.23687
   },
   {
     "id": 37,
     "name": "Cragganmore",
     "region": "Speyside",
-    "latitude": 57.4103,
-    "longitude": -3.3961
+    "latitude": 57.414272,
+    "longitude": -3.385112
   },
   {
     "id": 38,
     "name": "Caperdonich",
     "region": "Speyside",
     "status": "Demolished",
-    "latitude": 57.5208,
-    "longitude": -3.2422
+    "latitude": 57.530244,
+    "longitude": -3.207345
   },
   {
     "id": 39,
     "name": "Linkwood",
     "region": "Speyside",
-    "latitude": 57.6322,
-    "longitude": -3.2942
+    "latitude": 57.635429,
+    "longitude": -3.28651
   },
   {
     "id": 40,
     "name": "Balvenie",
     "region": "Speyside",
-    "latitude": 57.4606,
-    "longitude": -3.1278
+    "latitude": 57.458431,
+    "longitude": -3.12767
   },
   {
     "id": 41,
     "name": "Dailuaine",
     "region": "Speyside",
-    "latitude": 57.4525,
-    "longitude": -3.2678
+    "latitude": 57.452455,
+    "longitude": -3.273165
   },
   {
     "id": 42,
     "name": "Tobermory",
     "region": "Islands",
-    "latitude": 56.6231,
-    "longitude": -6.0647
+    "latitude": 56.62058,
+    "longitude": -6.06974
   },
   {
     "id": 43,
     "name": "Port Ellen",
     "region": "Islay",
-    "latitude": 55.6289,
-    "longitude": -6.1825
+    "latitude": 55.633537,
+    "longitude": -6.197387
   },
   {
     "id": 44,
     "name": "Craigellachie",
     "region": "Speyside",
-    "latitude": 57.4908,
-    "longitude": -3.2425
+    "latitude": 57.488566,
+    "longitude": -3.184541
   },
   {
     "id": 45,
     "name": "Dallas Dhu",
     "region": "Speyside",
     "status": "Closed",
-    "latitude": 57.5956,
-    "longitude": -3.6186
+    "latitude": 57.589762,
+    "longitude": -3.614014
   },
   {
     "id": 46,
     "name": "Glenlossie",
     "region": "Speyside",
-    "latitude": 57.6044,
-    "longitude": -3.315
+    "latitude": 57.598696,
+    "longitude": -3.319327
   },
   {
     "id": 47,
     "name": "Benromach",
     "region": "Speyside",
-    "latitude": 57.6144,
-    "longitude": -3.6019
+    "latitude": 57.613837,
+    "longitude": -3.619177
   },
   {
     "id": 48,
@@ -357,36 +357,36 @@
     "id": 51,
     "name": "Bushmills",
     "region": "Northern Ireland",
-    "latitude": 55.2014,
-    "longitude": -6.5206
+    "latitude": 55.202854,
+    "longitude": -6.517227
   },
   {
     "id": 52,
     "name": "Old Pulteney",
     "region": "Highland",
-    "latitude": 58.4358,
-    "longitude": -3.0828
+    "latitude": 58.434933,
+    "longitude": -3.085036
   },
   {
     "id": 53,
     "name": "Caol Ila",
     "region": "Islay",
-    "latitude": 55.8542,
-    "longitude": -6.1086
+    "latitude": 55.854099,
+    "longitude": -6.109339
   },
   {
     "id": 54,
     "name": "Aberlour",
     "region": "Speyside",
-    "latitude": 57.4678,
-    "longitude": -3.2289
+    "latitude": 57.467945,
+    "longitude": -3.229215
   },
   {
     "id": 55,
     "name": "Royal Brackla",
     "region": "Highland",
-    "latitude": 57.5583,
-    "longitude": -3.9181
+    "latitude": 57.538925,
+    "longitude": -3.902046
   },
   {
     "id": 56,
@@ -408,15 +408,15 @@
     "id": 58,
     "name": "Strathisla",
     "region": "Speyside",
-    "latitude": 57.5475,
-    "longitude": -2.9644
+    "latitude": 57.546908,
+    "longitude": -2.954306
   },
   {
     "id": 59,
     "name": "Teaninich",
     "region": "Highland",
-    "latitude": 57.6922,
-    "longitude": -4.2678
+    "latitude": 57.691538,
+    "longitude": -4.26054
   },
   {
     "id": 60,
@@ -444,15 +444,15 @@
     "id": 63,
     "name": "Glentauchers",
     "region": "Speyside",
-    "latitude": 57.5253,
-    "longitude": -3.0417
+    "latitude": 57.534353,
+    "longitude": -3.049495
   },
   {
     "id": 64,
     "name": "Mannochmore",
     "region": "Speyside",
-    "latitude": 57.6039,
-    "longitude": -3.3156
+    "latitude": 57.600826,
+    "longitude": -3.311365
   },
   {
     "id": 65,
@@ -466,8 +466,8 @@
     "id": 66,
     "name": "Ardmore",
     "region": "Highland",
-    "latitude": 57.3547,
-    "longitude": -2.7161
+    "latitude": 57.351601,
+    "longitude": -2.74535
   },
   {
     "id": 67,
@@ -481,8 +481,8 @@
     "id": 68,
     "name": "Blair Athol",
     "region": "Highland",
-    "latitude": 56.7011,
-    "longitude": -3.7258
+    "latitude": 56.698401,
+    "longitude": -3.722594
   },
   {
     "id": 69,
@@ -496,29 +496,29 @@
     "id": 70,
     "name": "Balblair",
     "region": "Highland",
-    "latitude": 57.835,
-    "longitude": -4.1842
+    "latitude": 57.840805,
+    "longitude": -4.181029
   },
   {
     "id": 71,
     "name": "Glenburgie",
     "region": "Speyside",
-    "latitude": 57.6194,
-    "longitude": -3.5133
+    "latitude": 57.621705,
+    "longitude": -3.516505
   },
   {
     "id": 72,
     "name": "Miltonduff",
     "region": "Speyside",
-    "latitude": 57.623375,
-    "longitude": -3.369431
+    "latitude": 57.623619,
+    "longitude": -3.369295
   },
   {
     "id": 73,
     "name": "Aultmore",
     "region": "Speyside",
-    "latitude": 57.5583,
-    "longitude": -3.0181
+    "latitude": 57.567549,
+    "longitude": -3.002115
   },
   {
     "id": 74,
@@ -540,8 +540,8 @@
     "id": 76,
     "name": "Mortlach",
     "region": "Speyside",
-    "latitude": 57.4456,
-    "longitude": -3.1256
+    "latitude": 57.443458,
+    "longitude": -3.122391
   },
   {
     "id": 77,
@@ -554,36 +554,36 @@
     "id": 78,
     "name": "Ben Nevis",
     "region": "Highland",
-    "latitude": 56.8353,
-    "longitude": -5.0747
+    "latitude": 56.834779,
+    "longitude": -5.074321
   },
   {
     "id": 79,
     "name": "Deanston",
     "region": "Highland",
-    "latitude": 56.1906,
-    "longitude": -4.0722
+    "latitude": 56.188838,
+    "longitude": -4.070221
   },
   {
     "id": 80,
     "name": "Glen Spey",
     "region": "Speyside",
-    "latitude": 57.5222,
-    "longitude": -3.2128
+    "latitude": 57.525788,
+    "longitude": -3.209868
   },
   {
     "id": 81,
     "name": "Glen Keith",
     "region": "Speyside",
-    "latitude": 57.5461,
-    "longitude": -2.9669
+    "latitude": 57.546776,
+    "longitude": -2.957185
   },
   {
     "id": 82,
     "name": "Glencadam",
     "region": "Highland",
-    "latitude": 56.7381,
-    "longitude": -2.6542
+    "latitude": 56.736147,
+    "longitude": -2.653166
   },
   {
     "id": 83,
@@ -604,8 +604,8 @@
     "id": 85,
     "name": "Glen Elgin",
     "region": "Speyside",
-    "latitude": 57.5997,
-    "longitude": -3.2658
+    "latitude": 57.599301,
+    "longitude": -3.277919
   },
   {
     "id": 86,
@@ -627,15 +627,15 @@
     "id": 88,
     "name": "Speyburn",
     "region": "Speyside",
-    "latitude": 57.5256,
-    "longitude": -3.2428
+    "latitude": 57.536431,
+    "longitude": -3.215958
   },
   {
     "id": 89,
     "name": "Tomintoul",
     "region": "Speyside",
-    "latitude": 57.3467,
-    "longitude": -3.3853
+    "latitude": 57.312494,
+    "longitude": -3.412379
   },
   {
     "id": 90,
@@ -649,8 +649,8 @@
     "id": 91,
     "name": "Dufftown",
     "region": "Speyside",
-    "latitude": 57.4439,
-    "longitude": -3.1203
+    "latitude": 57.435942,
+    "longitude": -3.127952
   },
   {
     "id": 92,
@@ -664,29 +664,29 @@
     "id": 93,
     "name": "Glen Scotia",
     "region": "Campbeltown",
-    "latitude": 55.4264,
-    "longitude": -5.6108
+    "latitude": 55.429585,
+    "longitude": -5.604166
   },
   {
     "id": 94,
     "name": "Fettercairn",
     "region": "Highland",
-    "latitude": 56.8489,
-    "longitude": -2.5761
+    "latitude": 56.853235,
+    "longitude": -2.581887
   },
   {
     "id": 95,
     "name": "Auchroisk",
     "region": "Speyside",
-    "latitude": 57.5217,
-    "longitude": -3.0139
+    "latitude": 57.547496,
+    "longitude": -3.114987
   },
   {
     "id": 96,
     "name": "GlenDronach",
     "region": "Highland",
-    "latitude": 57.4828,
-    "longitude": -2.6247
+    "latitude": 57.484493,
+    "longitude": -2.625842
   },
   {
     "id": 97,
@@ -716,29 +716,29 @@
     "id": 100,
     "name": "Strathmill",
     "region": "Speyside",
-    "latitude": 57.5344,
-    "longitude": -2.9731
+    "latitude": 57.5404,
+    "longitude": -2.961749
   },
   {
     "id": 101,
     "name": "Knockando",
     "region": "Speyside",
-    "latitude": 57.4658,
-    "longitude": -3.3517
+    "latitude": 57.456882,
+    "longitude": -3.343408
   },
   {
     "id": 102,
     "name": "Dalwhinnie",
     "region": "Highland",
-    "latitude": 56.9389,
-    "longitude": -4.2389
+    "latitude": 56.939652,
+    "longitude": -4.238518
   },
   {
     "id": 103,
     "name": "Royal Lochnagar",
     "region": "Highland",
-    "latitude": 57.0406,
-    "longitude": -3.2081
+    "latitude": 57.030076,
+    "longitude": -3.208688
   },
   {
     "id": 104,
@@ -751,29 +751,29 @@
     "id": 105,
     "name": "Tormore",
     "region": "Speyside",
-    "latitude": 57.4019,
-    "longitude": -3.4142
+    "latitude": 57.397948,
+    "longitude": -3.40846
   },
   {
     "id": 106,
     "name": "Cardhu",
     "region": "Speyside",
-    "latitude": 57.4703,
-    "longitude": -3.3425
+    "latitude": 57.470459,
+    "longitude": -3.350074
   },
   {
     "id": 107,
     "name": "Glenallachie",
     "region": "Speyside",
-    "latitude": 57.4411,
-    "longitude": -3.2292
+    "latitude": 57.454957,
+    "longitude": -3.228471
   },
   {
     "id": 108,
     "name": "Allt-a-Bhainne",
     "region": "Speyside",
-    "latitude": 57.4131,
-    "longitude": -3.1783
+    "latitude": 57.394425,
+    "longitude": -3.206481
   },
   {
     "id": 109,
@@ -786,15 +786,15 @@
     "id": 110,
     "name": "Oban",
     "region": "Highland",
-    "latitude": 56.4139,
-    "longitude": -5.4719
+    "latitude": 56.414977,
+    "longitude": -5.472271
   },
   {
     "id": 111,
     "name": "Lagavulin",
     "region": "Islay",
-    "latitude": 55.6369,
-    "longitude": -6.1264
+    "latitude": 55.635515,
+    "longitude": -6.126205
   },
   {
     "id": 112,
@@ -807,8 +807,8 @@
     "id": 113,
     "name": "Braeval (Braes of Glenlivet)",
     "region": "Speyside",
-    "latitude": 57.2847,
-    "longitude": -3.2981
+    "latitude": 57.271284,
+    "longitude": -3.258858
   },
   {
     "id": 114,
@@ -821,15 +821,15 @@
     "id": 115,
     "name": "Knockdhu (AnCnoc)",
     "region": "Speyside",
-    "latitude": 57.575,
-    "longitude": -2.7153
+    "latitude": 57.563552,
+    "longitude": -2.759018
   },
   {
     "id": 116,
     "name": "Yoichi",
     "region": "Japan",
-    "latitude": 43.1872,
-    "longitude": 140.7917
+    "latitude": 43.187252,
+    "longitude": 140.791871
   },
   {
     "id": 117,
@@ -849,22 +849,22 @@
     "id": 119,
     "name": "Yamazaki",
     "region": "Japan",
-    "latitude": 34.8932,
-    "longitude": 135.6746
+    "latitude": 34.892457,
+    "longitude": 135.674451
   },
   {
     "id": 120,
     "name": "Hakushu",
     "region": "Japan",
-    "latitude": 35.8267,
-    "longitude": 138.3017
+    "latitude": 35.828075,
+    "longitude": 138.303616
   },
   {
     "id": 121,
     "name": "Isle of Arran",
     "region": "Islands",
-    "latitude": 55.7135,
-    "longitude": -5.298
+    "latitude": 55.698559,
+    "longitude": -5.275852
   },
   {
     "id": 122,
@@ -877,22 +877,22 @@
     "id": 123,
     "name": "Glengoyne",
     "region": "Highland",
-    "latitude": 56.0136,
-    "longitude": -4.3389
+    "latitude": 56.013767,
+    "longitude": -4.364986
   },
   {
     "id": 124,
     "name": "Miyagikyo",
     "region": "Japan",
-    "latitude": 38.3081,
-    "longitude": 140.6506
+    "latitude": 38.312093,
+    "longitude": 140.64938
   },
   {
     "id": 125,
     "name": "Glenmorangie",
     "region": "Highland",
-    "latitude": 57.8267,
-    "longitude": -4.1789
+    "latitude": 57.826529,
+    "longitude": -4.077928
   },
   {
     "id": 126,
@@ -919,15 +919,15 @@
     "id": 129,
     "name": "Kilchoman",
     "region": "Islay",
-    "latitude": 55.7878,
-    "longitude": -6.4294
+    "latitude": 55.78688,
+    "longitude": -6.430513
   },
   {
     "id": 130,
     "name": "Chichibu",
     "region": "Japan",
-    "latitude": 36.0466,
-    "longitude": 139.0544
+    "latitude": 36.046939,
+    "longitude": 139.056006
   },
   {
     "id": 131,
@@ -942,8 +942,8 @@
     "name": "Karuizawa",
     "region": "Japan",
     "status": "Demolished",
-    "latitude": 36.3825,
-    "longitude": 138.5517
+    "latitude": 36.31843,
+    "longitude": 138.579667
   },
   {
     "id": 133,
@@ -963,8 +963,8 @@
     "id": 135,
     "name": "Loch Lomond",
     "region": "Highland",
-    "latitude": 55.9856,
-    "longitude": -4.5828
+    "latitude": 55.992378,
+    "longitude": -4.576572
   },
   {
     "id": 136,
@@ -1061,8 +1061,8 @@
     "id": 149,
     "name": "Ardnamurchan",
     "region": "Highland",
-    "latitude": 56.6872,
-    "longitude": -5.9264
+    "latitude": 56.691548,
+    "longitude": -5.940576
   },
   {
     "id": 150,
@@ -1110,8 +1110,8 @@
     "id": 156,
     "name": "Glasgow Distillery",
     "region": "Lowland",
-    "latitude": 55.85,
-    "longitude": -4.3411
+    "latitude": 55.863492,
+    "longitude": -4.362053
   },
   {
     "id": 157,
@@ -1131,15 +1131,15 @@
     "id": 159,
     "name": "Mars Shinshu",
     "region": "Japan",
-    "latitude": 35.7476,
-    "longitude": 137.9011
+    "latitude": 35.747702,
+    "longitude": 137.901318
   },
   {
     "id": 160,
     "name": "Mars Tsunuki",
     "region": "Japan",
-    "latitude": 31.38,
-    "longitude": 130.35
+    "latitude": 31.358976,
+    "longitude": 130.286012
   },
   {
     "id": 161,
@@ -1152,15 +1152,15 @@
     "id": 162,
     "name": "Isle of Raasay",
     "region": "Islands",
-    "latitude": 57.3486,
-    "longitude": -6.0717
+    "latitude": 57.35202,
+    "longitude": -6.074222
   },
   {
     "id": 163,
     "name": "Isle of Harris Distillery",
     "region": "Islands",
-    "latitude": 57.8994,
-    "longitude": -6.7972
+    "latitude": 57.897854,
+    "longitude": -6.803735
   },
   {
     "id": 164,
@@ -1173,15 +1173,15 @@
     "id": 165,
     "name": "Wolfburn",
     "region": "Highland",
-    "latitude": 58.6047,
-    "longitude": -3.5411
+    "latitude": 58.591597,
+    "longitude": -3.544978
   },
   {
     "id": 166,
     "name": "Torabhaig Distillery",
     "region": "Islands",
-    "latitude": 57.1472,
-    "longitude": -5.8506
+    "latitude": 57.112756,
+    "longitude": -5.84867
   },
   {
     "id": 167,
@@ -1194,8 +1194,8 @@
     "id": 168,
     "name": "InchDairnie Distillery",
     "region": "Lowland",
-    "latitude": 56.1731,
-    "longitude": -3.2089
+    "latitude": 56.18166,
+    "longitude": -3.215295
   },
   {
     "id": "B1",
@@ -1271,15 +1271,15 @@
     "id": "G1",
     "name": "North British",
     "region": "Lowland",
-    "latitude": 55.9401,
-    "longitude": -3.2351
+    "latitude": 55.939094,
+    "longitude": -3.236527
   },
   {
     "id": "G10",
     "name": "Strathclyde",
     "region": "Lowland",
-    "latitude": 55.8525,
-    "longitude": -4.258
+    "latitude": 55.848429,
+    "longitude": -4.24088
   },
   {
     "id": "G11",
@@ -1337,15 +1337,15 @@
     "id": "G4",
     "name": "Cameronbridge",
     "region": "Lowland",
-    "latitude": 56.1893,
-    "longitude": -3.0559
+    "latitude": 56.189387,
+    "longitude": -3.055774
   },
   {
     "id": "G5",
     "name": "Invergordon",
     "region": "Highland",
-    "latitude": 57.69,
-    "longitude": -4.17
+    "latitude": 57.695351,
+    "longitude": -4.165253
   },
   {
     "id": "G6",
