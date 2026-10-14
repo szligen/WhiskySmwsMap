@@ -1,0 +1,1 @@
+szligen.github.io/WhiskySmwsMap
